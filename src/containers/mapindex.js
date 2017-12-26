@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
-import '../theme/mapindex.less'
+import ReactDOM from 'react-dom';
+import '../theme/mapindex.less';
 
 class MapIndex extends React.Component {
  
