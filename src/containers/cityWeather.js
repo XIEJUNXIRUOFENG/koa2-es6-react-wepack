@@ -1,10 +1,10 @@
 import React from 'react';
 
 class CityWeather extends React.Component {
-    reader() {
+    render() {
         return (
             <div>option1</div>
-        );
+        )
     }
 }
 

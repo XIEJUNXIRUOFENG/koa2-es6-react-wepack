@@ -7,7 +7,7 @@ import WeatherTable from './weatherTable';
 
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
-const ContentDict = {1:'<CityWeather />', 2:'<WeatherTable />'}
+const ContentDict = {1:<CityWeather />, 2:<WeatherTable />}
 
 class SiderDemo extends React.Component {
 
@@ -84,6 +84,7 @@ class SiderDemo extends React.Component {
                     <Header style={{ background: '#fff', padding: 0 }} />
                     <Content  id='main' style={{ margin: '0 16px' }}>
                         {ContentDict[this.state.changed]}
+                        {/* <WeatherTable />*/}
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>
                         Writed by XIE-ZHANG
