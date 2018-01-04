@@ -1,15 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import {React, Component} from 'react'
+import { connect } from 'react-redux'
 import { Layout, Menu, Button, Icon } from 'antd';
 import CityWeather from './cityWeather';
 import WeatherTable from './weatherTable';
-// import MapIndex from './mapindex';
 
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 const ContentDict = {1:<CityWeather />, 2:<WeatherTable />}
 
-class SiderDemo extends React.Component {
+class App extends Component {
 
     state = {
         collapsed: false,
@@ -95,5 +94,4 @@ class SiderDemo extends React.Component {
     }
 }
 
-
-ReactDOM.render(<SiderDemo />, document.getElementById('root'))
+export default App

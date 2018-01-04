@@ -16,5 +16,5 @@ app.use(async (ctx, next) => {
 app.use(async(ctx) => {
   await ctx.render('index.html');
 });
-app.listen(8000);
-console.log('端口：localhost:8000')
+app.listen(1906);
+console.log('端口：localhost:1906')
