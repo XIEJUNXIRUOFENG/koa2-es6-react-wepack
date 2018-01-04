@@ -1,55 +1,124 @@
 import React from 'react';
+import { Checkbox, Row, Col  } from 'antd';
 import { Table } from 'antd';
+import { Modal, Button } from 'antd';
+import '../theme/table.less';
+
+// 多选框
+const CheckboxGroup = Checkbox.Group;
+let cityGroup = [];
+
+function onChange(checkedValues) {
+    console.log('checked = ', checkedValues);
+    function isSelect(value) {
+        return checkedValues.includes(value.city);
+    }
+    cityGroup = data.filter(isSelect);
+}
+  
+const plainOptions = ['Hangzhou', 'Chengdu', 'Suzhou'];
+const options = ['Shanghai', 'Beijing', 'Guangzhou'];
+const optionsWithDisabled = ['Shenzhen', 'Wenzhou', 'Nanjing'];
 
 const columns = [{
-    title: 'Name',
-    dataIndex: 'name',
+    title: 'City',
+    dataIndex: 'city',
     render: text => <a href="#">{text}</a>,
   }, {
-    title: 'Age',
-    dataIndex: 'age',
+    title: 'Mon',
+    dataIndex: 'Monday',
   }, {
-    title: 'Address',
-    dataIndex: 'address',
+    title: 'Tue',
+    dataIndex: 'Tuesday',
+}, {
+    title: 'Wed',
+    dataIndex: 'Wednesday',
+}, {
+    title: 'Thu',
+    dataIndex: 'Thursday',
+}, {
+    title: 'Fri',
+    dataIndex: 'Friday',
+}, {
+    title: 'Sat',
+    dataIndex: 'Saturday',
+}, {
+    title: 'Sun',
+    dataIndex: 'Sunday',
 }];
 
 const data = [{
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
+    city: 'Beijing',
+    Monday: '晴',
+    Tuesday: '中雨',
+    Wednesday: '中雨转小雨',
+    Thursday: '晴',
+    Friday: '晴',
+    Saturday: '晴',
+    Sunday: '晴'
     }, {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
+    city: 'Shanghai',
     }, {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
+    city: 'Guangzhou',
     }, {
-    key: '4',
-    name: 'Disabled User',
-    age: 99,
-    address: 'Sidney No. 1 Lake Park',
+    city: 'Shenzhen',
+    }, {
+    city: 'Hangzhou',
+    }, {
+    city: 'Chengdu',
+    }, {
+    city: 'Suzhou',
+    }, {
+    city: 'Wenzhou',
+    }, {
+    city: 'Nanjing',
 }];
-  
-  // rowSelection object indicates the need for row selection
-const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-    },
-    getCheckboxProps: record => ({
-        disabled: record.name === 'Disabled User', // Column configuration not to be checked
-    }),
-};
 
 class WeatherTable extends React.Component {
+    state = { visible: false }
+    showModal = () => {
+      this.setState({
+        visible: true,
+      });
+    }
+    handleOk = (e) => {
+      console.log(e);
+      this.setState({
+        visible: false,
+      });
+    }
+    handleCancel = (e) => {
+      console.log(e);
+      this.setState({
+        visible: false,
+      });
+    }
+
     render() {
         return (
-            <div>
-                <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+            <div className="weather-table">
+                <Table bordered={true} className="table-nested" columns={columns} dataSource={cityGroup} pagination={false} />
+                <Button type="primary" className="weather-nested" onClick={this.showModal}>选择城市</Button>
+                <Modal
+                    title="全国各大城市"
+                    visible={this.state.visible}
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                >
+                    <Checkbox.Group style={{ width: '100%' }} onChange={onChange}>
+                        <Row>
+                            <Col span={8}><Checkbox value="Beijing">Beijing</Checkbox></Col>
+                            <Col span={8}><Checkbox value="Shanghai">Shanghai</Checkbox></Col>
+                            <Col span={8}><Checkbox value="Guangzhou">Guangzhou</Checkbox></Col>
+                            <Col span={8}><Checkbox value="Shenzhen">Shenzhen</Checkbox></Col>
+                            <Col span={8}><Checkbox value="Hangzhou">Hangzhou</Checkbox></Col>
+                            <Col span={8}><Checkbox value="Chengdu">Chengdu</Checkbox></Col>
+                            <Col span={8}><Checkbox value="Suzhou">Suzhou</Checkbox></Col>
+                            <Col span={8}><Checkbox value="Wenzhou">Wenzhou</Checkbox></Col>
+                            <Col span={8}><Checkbox value="Nanjing">Nanjing</Checkbox></Col>
+                        </Row>
+                    </Checkbox.Group>
+                </Modal>
             </div>
         );
     }
