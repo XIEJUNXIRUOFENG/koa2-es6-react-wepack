@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import App from './index';
-import CityWeather from './cityWeather';
+import App from './index';
 import '../theme/index.less'
 import '../../node_modules/antd/dist/antd.less';
 import { Provider } from 'react-redux'
@@ -12,7 +11,7 @@ const store = configureStore()
 
 ReactDOM.render(
   <Provider store={store}>
-    <CityWeather />
+    <App />
   </Provider>,
   document.getElementById('root')
 )

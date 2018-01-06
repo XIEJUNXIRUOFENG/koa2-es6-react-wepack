@@ -1,5 +1,4 @@
-import {React, Component} from 'react'
-import { connect } from 'react-redux'
+import React, { Component, PropTypes } from 'react';
 import { Layout, Menu, Button, Icon } from 'antd';
 import CityWeather from './cityWeather';
 import WeatherTable from './weatherTable';
