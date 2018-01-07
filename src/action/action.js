@@ -2,6 +2,13 @@ import fetch from 'isomorphic-fetch'
 
 export const SELECT_WEATHER = 'SELECT_WEATHER'
 export const WEATHER_TABLE = 'WEATHER_TABLE'
+export const BEIJING_WEATHER = 'BEIJING_WEATHER'
+
+export function allCityWeather(message, actionType) {
+  return (dispatch, getState) => {
+      return dispatch(fetchPosts(message, actionType))
+  }
+}
 
 export function selectWeather(message) {
   let actionType = SELECT_WEATHER
@@ -22,7 +29,8 @@ function receivePosts(message, json, actionType) {
     type: actionType,
     message,
     weatherDetail: json,
-    weatherTable: json
+    weatherTable: json,
+    beijingWeather: json
   }
 }
 

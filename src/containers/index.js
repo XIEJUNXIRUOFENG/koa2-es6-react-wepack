@@ -1,18 +1,28 @@
 import React, { Component, PropTypes } from 'react'
 import { Layout, Menu, Button, Icon } from 'antd'
+import { connect } from 'react-redux'
 import CityWeather from './cityWeather'
 import WeatherTable from './weatherTable'
+import { allCityWeather, BEIJING_WEATHER } from '../action/action'
 
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 const ContentDict = {1:<CityWeather />, 2:<WeatherTable />}
 
 class App extends Component {
+	constructor(props) {
+		super(props)
+  }
 
 	state = {
 		collapsed: false,
 		changed: 1,
 	};
+
+	componentWillMount () {
+		const { dispatch } = this.props
+    dispatch(allCityWeather('city=320100&key=ecfbe66140f8ed4cc0bcbcf92b111074', BEIJING_WEATHER))
+	}
 
 	onCollapse = (collapsed) => {
 			this.setState({ collapsed });
@@ -29,6 +39,7 @@ class App extends Component {
 	}
 	
 	render() {
+		console.warn('需要', this.props)
 			return (
 					<Layout style={{ minHeight: '100vh' }}>
 							<Sider
@@ -92,4 +103,14 @@ class App extends Component {
 	}
 }
 
-export default App;
+function mapStateToProps(state) {
+	console.warn('全局state', state)
+  const { postsByWeather } = state
+	const beijingDetail = postsByWeather[BEIJING_WEATHER] ? postsByWeather[BEIJING_WEATHER]['beiJing']['lives'][0] : []
+
+  return {
+    beijingDetail
+  }
+}
+
+export default connect(mapStateToProps)(App);
