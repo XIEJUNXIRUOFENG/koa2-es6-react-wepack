@@ -3,7 +3,7 @@ import { Layout, Menu, Button, Icon } from 'antd'
 import { connect } from 'react-redux'
 import CityWeather from './cityWeather'
 import WeatherTable from './weatherTable'
-import { allCityWeather, BEIJING_WEATHER } from '../action/action'
+import { allCityWeather, BEIJING_WEATHER, NANJING_WEATHER } from '../action/action'
 
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
@@ -21,7 +21,8 @@ class App extends Component {
 
 	componentWillMount () {
 		const { dispatch } = this.props
-    dispatch(allCityWeather('city=320100&key=ecfbe66140f8ed4cc0bcbcf92b111074', BEIJING_WEATHER))
+		dispatch(allCityWeather('city=110000&extensions=all&key=ecfbe66140f8ed4cc0bcbcf92b111074', BEIJING_WEATHER))
+		dispatch(allCityWeather('city=320100&extensions=all&key=ecfbe66140f8ed4cc0bcbcf92b111074', NANJING_WEATHER))
 	}
 
 	onCollapse = (collapsed) => {
@@ -104,12 +105,14 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-	console.warn('全局state', state)
-  const { postsByWeather } = state
-	const beijingDetail = postsByWeather[BEIJING_WEATHER] ? postsByWeather[BEIJING_WEATHER]['beiJing']['lives'][0] : []
+	// console.warn('全局state', state)
+  	const { postsByWeather } = state
+	const beijingDetail = postsByWeather[BEIJING_WEATHER] ? postsByWeather[BEIJING_WEATHER]['beiJing']['forecasts'][0]['casts'] : []
+	const nanjingDetail = postsByWeather[NANJING_WEATHER] ? postsByWeather[NANJING_WEATHER]['nanJing']['forecasts'][0]['casts'] : []
 
   return {
-    beijingDetail
+	beijingDetail,
+	nanjingDetail
   }
 }
 
