@@ -1,37 +1,13 @@
 import { combineReducers } from 'redux'
-import { RECEIVE_POSTS } from '../action/action'
-
-// function selectWeatherDit (state = {}, action) {
-// 	console.warn('dit出发了')
-// 	switch (action.type) {
-// 		case SELECT_WEATHER:
-// 			return action.message
-// 		default:
-// 			return state
-// 	}
-// }
+import { SELECT_WEATHER } from '../action/action'
 
 function posts(state = {
-	// isFetching: false,
-	// didInvalidate: false,
 	items: []
 }, action) {
 	switch (action.type) {
-		// case INVALIDATE_SUBREDDIT :
-		// 	return Object.assign({}, state, {
-		// 		didInvalidate: true
-		// 	})
-		// case REQUEST_POSTS:
-		// 	return Object.assign({}, state, {
-		// 		isFetching: true,
-		// 		didInvalidate: false
-		// 	})
-		case RECEIVE_POSTS:
+		case SELECT_WEATHER:
 			return Object.assign({}, state, {
-				// isFetching: false,
-				// didInvalidate: false,
-				items: action.posts,
-				// lastUpdated: action.receivedAt
+				items: action.weatherDetail,
 			})
 		default:
 			return state
@@ -39,11 +15,10 @@ function posts(state = {
 }
 
 function postsByWeather(state = { }, action) {
-	console.warn(action)
   switch (action.type) {
-    case RECEIVE_POSTS:
+    case SELECT_WEATHER:
       return Object.assign({}, state, {
-        [action.message]: posts(state[action.message], action)
+        [action.type]: posts(state[action.type], action)
       })
     default:
       return state
@@ -51,7 +26,6 @@ function postsByWeather(state = { }, action) {
 }
 
 const allApp = combineReducers({
-	// selectWeatherDit,
 	postsByWeather
 })
 
