@@ -13,7 +13,7 @@ function receivePosts(message, json, actionType) {
   return {
     type: actionType,
     message,
-    weatherDetail: json.lives,
+    weatherDetail: json,
   }
 }
 

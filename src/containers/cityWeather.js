@@ -11,7 +11,7 @@ class CityWeather extends Component {
   
 	getWeather = () => {
 		const { dispatch } = this.props
-    dispatch(selectWeather('city=110101&key=ecfbe66140f8ed4cc0bcbcf92b111074'))
+    dispatch(selectWeather('city=320100&key=ecfbe66140f8ed4cc0bcbcf92b111074'))
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -31,11 +31,7 @@ class CityWeather extends Component {
 function mapStateToProps(state) {
   const { postsByWeather } = state
   console.warn(state)
-	const {
-    items: weatherDetail
-  } = postsByWeather[SELECT_WEATHER] || {
-    items: []
-  }
+	const weatherDetail = postsByWeather[SELECT_WEATHER] ? postsByWeather[SELECT_WEATHER]['items']['lives'][0] : []
 
   return {
     weatherDetail
