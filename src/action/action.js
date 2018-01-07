@@ -1,9 +1,17 @@
 import fetch from 'isomorphic-fetch'
 
 export const SELECT_WEATHER = 'SELECT_WEATHER'
+export const WEATHER_TABLE = 'WEATHER_TABLE'
 
 export function selectWeather(message) {
   let actionType = SELECT_WEATHER
+  return (dispatch, getState) => {
+      return dispatch(fetchPosts(message, actionType))
+  }
+}
+
+export function weatherTable(message) {
+  let actionType = WEATHER_TABLE
   return (dispatch, getState) => {
       return dispatch(fetchPosts(message, actionType))
   }
@@ -14,6 +22,7 @@ function receivePosts(message, json, actionType) {
     type: actionType,
     message,
     weatherDetail: json,
+    weatherTable: json
   }
 }
 

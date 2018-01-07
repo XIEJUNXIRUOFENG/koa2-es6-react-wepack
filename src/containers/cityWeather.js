@@ -19,7 +19,7 @@ class CityWeather extends Component {
 
 	render() {
 		const { weatherDetail } = this.props
-		console.log('最后的', weatherDetail);
+		console.warn('op1结果', weatherDetail)
 		return (
 			<div>
 				<Button type="primary" onClick={this.getWeather}>点击获取天气</Button>
@@ -30,7 +30,6 @@ class CityWeather extends Component {
 
 function mapStateToProps(state) {
   const { postsByWeather } = state
-  console.warn(state)
 	const weatherDetail = postsByWeather[SELECT_WEATHER] ? postsByWeather[SELECT_WEATHER]['items']['lives'][0] : []
 
   return {

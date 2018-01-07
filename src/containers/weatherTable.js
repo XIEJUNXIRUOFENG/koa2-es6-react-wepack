@@ -2,6 +2,9 @@ import React from 'react';
 import { Checkbox, Row, Col  } from 'antd';
 import { Table } from 'antd';
 import { Modal, Button } from 'antd';
+import { connect } from 'react-redux'
+import { weatherTable } from '../action/action'
+import { WEATHER_TABLE } from '../action/action'
 import '../theme/table.less';
 
 // 多选框
@@ -75,6 +78,12 @@ const data = [{
 }];
 
 class WeatherTable extends React.Component {
+
+    componentWillMount () {
+        const { dispatch } = this.props
+		dispatch(weatherTable('city=110000&key=ecfbe66140f8ed4cc0bcbcf92b111074'))
+    }
+    
     state = { visible: false }
     showModal = () => {
       this.setState({
@@ -82,19 +91,18 @@ class WeatherTable extends React.Component {
       });
     }
     handleOk = (e) => {
-      console.log(e);
       this.setState({
         visible: false,
       });
     }
     handleCancel = (e) => {
-      console.log(e);
       this.setState({
         visible: false,
       });
     }
 
     render() {
+        console.warn('Table结果', this.props)
         return (
             <div className="weather-table">
                 <Table bordered={true} className="table-nested" columns={columns} dataSource={cityGroup} pagination={false} />
@@ -123,5 +131,13 @@ class WeatherTable extends React.Component {
         );
     }
 }
-
-export default WeatherTable;
+function mapStateToProps(state) {
+    const { postsByWeather } = state
+    const weatherTable = postsByWeather[WEATHER_TABLE] ? postsByWeather[WEATHER_TABLE]['itemTable']['lives'][0] : []
+  
+    return {
+      weatherTable
+    }
+  }
+  
+  export default connect(mapStateToProps)(WeatherTable)
