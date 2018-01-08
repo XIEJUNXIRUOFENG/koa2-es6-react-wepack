@@ -3,7 +3,7 @@ import { Layout, Menu, Button, Icon } from 'antd'
 import { connect } from 'react-redux'
 import CityWeather from './cityWeather'
 import WeatherTable from './weatherTable'
-import { allCityWeather, BEIJING_WEATHER, NANJING_WEATHER } from '../action/action'
+import { allCityWeather, BEIJING_WEATHER, NANJING_WEATHER, SHANGHAI_WEATHER, GUANGZHOU_WEATHER, SHENZHEN_WEATHER, HANGZHOU_WEATHER, CHENGDU_WEATHER, SUZHOU_WEATHER, WENZHOU_WEATHER } from '../action/action'
 
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
@@ -23,6 +23,13 @@ class App extends Component {
 		const { dispatch } = this.props
 		dispatch(allCityWeather('city=110000&extensions=all&key=ecfbe66140f8ed4cc0bcbcf92b111074', BEIJING_WEATHER))
 		dispatch(allCityWeather('city=320100&extensions=all&key=ecfbe66140f8ed4cc0bcbcf92b111074', NANJING_WEATHER))
+		dispatch(allCityWeather('city=310000&extensions=all&key=ecfbe66140f8ed4cc0bcbcf92b111074', SHANGHAI_WEATHER))
+		dispatch(allCityWeather('city=440100&extensions=all&key=ecfbe66140f8ed4cc0bcbcf92b111074', GUANGZHOU_WEATHER))
+		dispatch(allCityWeather('city=440300&extensions=all&key=ecfbe66140f8ed4cc0bcbcf92b111074', SHENZHEN_WEATHER))
+		dispatch(allCityWeather('city=330100&extensions=all&key=ecfbe66140f8ed4cc0bcbcf92b111074', HANGZHOU_WEATHER))
+		dispatch(allCityWeather('city=510100&extensions=all&key=ecfbe66140f8ed4cc0bcbcf92b111074', CHENGDU_WEATHER))
+		dispatch(allCityWeather('city=320500&extensions=all&key=ecfbe66140f8ed4cc0bcbcf92b111074', SUZHOU_WEATHER))
+		dispatch(allCityWeather('city=330300&extensions=all&key=ecfbe66140f8ed4cc0bcbcf92b111074', WENZHOU_WEATHER))
 	}
 
 	onCollapse = (collapsed) => {
@@ -40,7 +47,7 @@ class App extends Component {
 	}
 	
 	render() {
-		console.warn('需要', this.props)
+		// console.warn('需要', this.props)
 			return (
 					<Layout style={{ minHeight: '100vh' }}>
 							<Sider
@@ -104,16 +111,6 @@ class App extends Component {
 	}
 }
 
-function mapStateToProps(state) {
-	// console.warn('全局state', state)
-  	const { postsByWeather } = state
-	const beijingDetail = postsByWeather[BEIJING_WEATHER] ? postsByWeather[BEIJING_WEATHER]['beiJing']['forecasts'][0]['casts'] : []
-	const nanjingDetail = postsByWeather[NANJING_WEATHER] ? postsByWeather[NANJING_WEATHER]['nanJing']['forecasts'][0]['casts'] : []
+function mapStateToProps(state) {}
 
-  return {
-	beijingDetail,
-	nanjingDetail
-  }
-}
-
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(App)

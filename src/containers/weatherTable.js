@@ -2,9 +2,9 @@ import React from 'react';
 import { Checkbox, Row, Col  } from 'antd';
 import { Table } from 'antd';
 import { Modal, Button } from 'antd';
-import { connect } from 'react-redux'
-import { weatherTable } from '../action/action'
-import { WEATHER_TABLE } from '../action/action'
+import { connect } from 'react-redux';
+import { BEIJING_WEATHER, NANJING_WEATHER, SHANGHAI_WEATHER, GUANGZHOU_WEATHER, SHENZHEN_WEATHER, HANGZHOU_WEATHER, CHENGDU_WEATHER, SUZHOU_WEATHER, WENZHOU_WEATHER } from '../action/action'
+
 import '../theme/table.less';
 
 // 多选框
@@ -79,11 +79,6 @@ const data = [{
 
 class WeatherTable extends React.Component {
 
-    componentWillMount () {
-        const { dispatch } = this.props
-		dispatch(weatherTable('city=110000&key=ecfbe66140f8ed4cc0bcbcf92b111074'))
-    }
-    
     state = { visible: false }
     showModal = () => {
       this.setState({
@@ -131,13 +126,29 @@ class WeatherTable extends React.Component {
         );
     }
 }
+
 function mapStateToProps(state) {
     const { postsByWeather } = state
-    const weatherTable = postsByWeather[WEATHER_TABLE] ? postsByWeather[WEATHER_TABLE]['itemTable']['lives'][0] : []
-  
+	const Beijing = postsByWeather[BEIJING_WEATHER] ? postsByWeather[BEIJING_WEATHER]['beiJing']['forecasts'][0]['casts'] : []
+	const Nanjing = postsByWeather[NANJING_WEATHER] ? postsByWeather[NANJING_WEATHER]['nanJing']['forecasts'][0]['casts'] : []
+	const Shanghai = postsByWeather[SHANGHAI_WEATHER] ? postsByWeather[SHANGHAI_WEATHER]['shangHai']['forecasts'][0]['casts'] : []
+	const Guangzhou = postsByWeather[GUANGZHOU_WEATHER] ? postsByWeather[GUANGZHOU_WEATHER]['guangZhou']['forecasts'][0]['casts'] : []
+	const Shenzhen = postsByWeather[SHENZHEN_WEATHER] ? postsByWeather[SHENZHEN_WEATHER]['shenZhen']['forecasts'][0]['casts'] : []
+	const Hangzhou = postsByWeather[HANGZHOU_WEATHER] ? postsByWeather[HANGZHOU_WEATHER]['hangZhou']['forecasts'][0]['casts'] : []
+	const Chengdu = postsByWeather[CHENGDU_WEATHER] ? postsByWeather[CHENGDU_WEATHER]['chengDu']['forecasts'][0]['casts'] : []
+	const Suzhou = postsByWeather[SUZHOU_WEATHER] ? postsByWeather[SUZHOU_WEATHER]['suZhou']['forecasts'][0]['casts'] : []
+	const Wenzhou = postsByWeather[WENZHOU_WEATHER] ? postsByWeather[WENZHOU_WEATHER]['wenZhou']['forecasts'][0]['casts'] : []
     return {
-      weatherTable
+        Beijing,
+        Nanjing,
+        Shanghai,
+        Guangzhou,
+        Shenzhen,
+        Hangzhou,
+        Chengdu,
+        Suzhou,
+        Wenzhou
     }
-  }
+}
   
-  export default connect(mapStateToProps)(WeatherTable)
+export default connect(mapStateToProps)(WeatherTable);
