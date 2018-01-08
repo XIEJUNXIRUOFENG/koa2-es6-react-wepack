@@ -16,66 +16,25 @@ function onChange(checkedValues) {
     function isSelect(value) {
         return checkedValues.includes(value.city);
     }
-    cityGroup = data.filter(isSelect);
+    cityGroup = dataFormat.filter(isSelect);
 }
   
 const plainOptions = ['Hangzhou', 'Chengdu', 'Suzhou'];
 const options = ['Shanghai', 'Beijing', 'Guangzhou'];
 const optionsWithDisabled = ['Shenzhen', 'Wenzhou', 'Nanjing'];
 
-const columns = [{
-    title: 'City',
-    dataIndex: 'city',
-    render: text => <a href="#">{text}</a>,
-  }, {
-    title: 'Mon',
-    dataIndex: 'Monday',
-  }, {
-    title: 'Tue',
-    dataIndex: 'Tuesday',
-}, {
-    title: 'Wed',
-    dataIndex: 'Wednesday',
-}, {
-    title: 'Thu',
-    dataIndex: 'Thursday',
-}, {
-    title: 'Fri',
-    dataIndex: 'Friday',
-}, {
-    title: 'Sat',
-    dataIndex: 'Saturday',
-}, {
-    title: 'Sun',
-    dataIndex: 'Sunday',
-}];
+// 表格列表项
+const date = new Date();
+var arr = [{ title: '城市', dataIndex: 'city'}];
+for (let i=0; i <=3; i++) {
+    let obj = {};
+    obj.title = (date.getMonth() + 1) + '月' + (date.getDate() + i) + '日';
+    obj.children = [{ title: '晨间', dataIndex: 'dayweather' + i}, { title: '夜晚', dataIndex: 'nightweather' + i}]
+    arr.push(obj);
+}
+const columns = arr;
 
-const data = [{
-    city: 'Beijing',
-    Monday: '晴',
-    Tuesday: '中雨',
-    Wednesday: '中雨转小雨',
-    Thursday: '晴',
-    Friday: '晴',
-    Saturday: '晴',
-    Sunday: '晴'
-    }, {
-    city: 'Shanghai',
-    }, {
-    city: 'Guangzhou',
-    }, {
-    city: 'Shenzhen',
-    }, {
-    city: 'Hangzhou',
-    }, {
-    city: 'Chengdu',
-    }, {
-    city: 'Suzhou',
-    }, {
-    city: 'Wenzhou',
-    }, {
-    city: 'Nanjing',
-}];
+var dataFormat = [];
 
 class WeatherTable extends React.Component {
 
@@ -97,7 +56,21 @@ class WeatherTable extends React.Component {
     }
 
     render() {
-        console.warn('Table结果', this.props)
+        const data = this.props;
+        console.warn('Table结果', data);
+        dataFormat = [];
+        for (let key of Object.keys(data)) {
+            if (key === 'dispatch') {
+                continue;
+            }
+            var obj = {};
+            obj.city = key;
+            data[key].forEach(function (val, index) {
+                obj['dayweather' + index] = val.dayweather;
+                obj['nightweather' + index] = val.nightweather;
+            });
+            dataFormat.push(obj);
+        }
         return (
             <div className="weather-table">
                 <Table bordered={true} className="table-nested" columns={columns} dataSource={cityGroup} pagination={false} />
