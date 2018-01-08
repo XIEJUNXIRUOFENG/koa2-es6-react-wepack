@@ -98,7 +98,7 @@ class App extends Component {
 									</div>
 							</Sider>
 							<Layout>
-									<Header style={{ background: '#fff', padding: 0 }} />
+									{/* <Header style={{ background: '#fff', padding: 0 }} /> */}
 									<Content  id='main' style={{ margin: '0 16px' }}>
 											{ContentDict[this.state.changed]}
 											{/* <WeatherTable />*/}
