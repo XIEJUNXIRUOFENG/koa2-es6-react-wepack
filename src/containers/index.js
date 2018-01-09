@@ -4,11 +4,12 @@ import { connect } from 'react-redux'
 import CityWeather from './cityWeather'
 import WeatherTable from './weatherTable'
 import ImageWeather from './imageWeather/imageWeather'
+import MapIndex from './mapindex'
 import { allCityWeather, BEIJING_WEATHER, NANJING_WEATHER, SHANGHAI_WEATHER, GUANGZHOU_WEATHER, SHENZHEN_WEATHER, HANGZHOU_WEATHER, CHENGDU_WEATHER, SUZHOU_WEATHER, WENZHOU_WEATHER } from '../action/action'
 
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
-const ContentDict = {1:<CityWeather />, 2:<WeatherTable />, 3:<ImageWeather />}
+const ContentDict = {1:<CityWeather />, 2:<WeatherTable />, 3:<ImageWeather />, 4:<MapIndex />}
 
 class App extends Component {
 	constructor(props) {
@@ -80,7 +81,7 @@ class App extends Component {
 								<span>图形天气预报</span>
 							</Menu.Item>
 							<Menu.Item key="4">
-								<Icon type="line-chart" />
+								<Icon type="global" />
 								<span>地图查询</span>
 							</Menu.Item>
 							<Menu.Item key="5">

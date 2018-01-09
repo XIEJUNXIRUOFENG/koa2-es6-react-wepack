@@ -19,7 +19,6 @@ class CityWeather extends Component {
 
 	render() {
 		const { weatherDetail } = this.props
-		console.warn('op1结果', weatherDetail)
 		return (
 			<div>
 				<Button type="primary" onClick={this.getWeather}>点击获取天气</Button>
