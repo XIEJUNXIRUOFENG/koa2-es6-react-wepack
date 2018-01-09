@@ -29,6 +29,7 @@
     "lodash": "^4.17.4",
     "path": "^0.12.7",
     "react": "^16.2.0",
+    "react-amap": "^1.2.0",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^3.0.0",
     "react-redux": "^5.0.6",
