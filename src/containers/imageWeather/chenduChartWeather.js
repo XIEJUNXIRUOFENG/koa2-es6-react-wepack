@@ -29,7 +29,7 @@ class ChenduChartWeather extends Component {
     })
     this.options = {
       title: {
-        text: '上海近四天昼夜温度情况',
+        text: '成都近四天昼夜温度情况',
         subtext: '数据来源高德天气',
         textStyle: {
           fontSize: 14
@@ -121,7 +121,7 @@ class ChenduChartWeather extends Component {
       style: this.props.style
     };
     return (
-      <Card className='shanghai-chart-weather' title='上海气象'>
+      <Card className='shanghai-chart-weather' title='成都气象'>
         <div {...props} />
       </Card>
     )

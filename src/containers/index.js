@@ -95,7 +95,7 @@ class App extends Component {
 					<Content  id='main' style={{ margin: '0 16px' }}>
 							{ContentDict[this.state.changed]}
 					</Content>
-					<Footer style={{ textAlign: 'center' }}>
+					<Footer style={{ textAlign: 'center', backgroundColor: '#FFFFF0', color: '#001529' }}>
 							Writed by XIE-ZHANG
 					</Footer>
 				</Layout>                   

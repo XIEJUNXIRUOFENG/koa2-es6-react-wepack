@@ -29,7 +29,7 @@ class SuzhouChartWeather extends Component {
     })
     this.options = {
       title: {
-        text: '上海近四天昼夜温度情况',
+        text: '苏州近四天昼夜温度情况',
         subtext: '数据来源高德天气',
         textStyle: {
           fontSize: 14
