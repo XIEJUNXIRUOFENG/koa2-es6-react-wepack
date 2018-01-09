@@ -1,13 +1,13 @@
 import React, { Component, propTypes } from 'react'
 import { connect } from 'react-redux';
 import {echarts} from '../../utils/echartsImport';
-import { BEIJING_WEATHER } from '../../action/action'
+import { HANGZHOU_WEATHER } from '../../action/action'
 import Card from '../card'
 
-class BeijingChartWeather extends Component {
+class HangzhouChartWeather extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.options = {};
     this.chartIns = null;
   }
@@ -18,18 +18,18 @@ class BeijingChartWeather extends Component {
   };
 
   componentDidMount() {
-    const {Beijing, color} = this.props
+    const {Hangzhou, color} = this.props
     let dateData = []
-    let beijingDaytemp = []
-    let beijingNighttemp = []
-    Beijing.forEach((e, i) => {
+    let hangzhouDaytemp = []
+    let hangzhouNighttemp = []
+    Hangzhou.forEach((e, i) => {
       dateData[i] = e.date
-      beijingDaytemp[i] = e.daytemp
-      beijingNighttemp[i] = e.nighttemp
+      hangzhouDaytemp[i] = e.daytemp
+      hangzhouNighttemp[i] = e.nighttemp
     })
     this.options = {
       title: {
-        text: '北京近四天昼夜温度情况',
+        text: '杭州近四天昼夜温度情况',
         subtext: '数据来源高德天气',
         textStyle: {
           fontSize: 14
@@ -62,7 +62,7 @@ class BeijingChartWeather extends Component {
         {
           name: '白天温度',
           type: 'line',
-          data: beijingDaytemp,
+          data: hangzhouDaytemp,
           markPoint: {
             data: [
                 {type: 'max', name: '最大值'},
@@ -78,7 +78,7 @@ class BeijingChartWeather extends Component {
         {
           name: '夜晚温度',
           type: 'line',
-          data: beijingNighttemp,
+          data: hangzhouNighttemp,
           markPoint: {
             data: [
                 {type: 'max', name: '最大值'},
@@ -121,7 +121,7 @@ class BeijingChartWeather extends Component {
       style: this.props.style
     };
     return (
-      <Card className='beijing-chart-weather' title='北京气象'>
+      <Card className='hangzhou-chart-weather' title='杭州气象'>
         <div {...props} />
       </Card>
     )
@@ -130,10 +130,10 @@ class BeijingChartWeather extends Component {
 
 function mapStateToProps(state) {
   const { postsByWeather } = state
-  const Beijing = postsByWeather[BEIJING_WEATHER] ? postsByWeather[BEIJING_WEATHER]['beiJing']['forecasts'][0]['casts'] : []
+  const Hangzhou = postsByWeather[HANGZHOU_WEATHER] ? postsByWeather[HANGZHOU_WEATHER]['hangZhou']['forecasts'][0]['casts'] : []
   return {
-      Beijing,
+    Hangzhou,
   }
 }
 
-export default connect(mapStateToProps)(BeijingChartWeather);
+export default connect(mapStateToProps)(HangzhouChartWeather);
