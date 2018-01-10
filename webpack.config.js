@@ -53,7 +53,10 @@ module.exports = {
       },
       { test: /\.(css|less)$/, loader: ExtractTextPlugin.extract(['css-loader', 'less-loader']) },
       { test: /\.(png|jpg|gif)$/,
-        loader: 'url-loader?limit=8192&name=../src/images/[name].[ext]?[hash]'
+        loader: 'url-loader',
+        query: {
+          limit: 10000
+        }
       }
     ]
   },
