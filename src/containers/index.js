@@ -70,7 +70,7 @@ class App extends Component {
 						>
 							<Menu.Item key="1">
 								<Icon type="desktop" />
-								<span>重要城市天气预报</span>
+								<span>主要城市天气预报</span>
 							</Menu.Item>
 							<Menu.Item key="2">
 								<Icon type="table" />
